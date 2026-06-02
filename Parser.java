@@ -17,7 +17,9 @@ public class Parser {
         // implementation to read the file and create a Formula object
         Scanner sc = new Scanner(file);
         int variables = 0;
-        int clauses = 0;
+        int numClauses = 0;
+
+        List<Clause> clauses = new ArrayList<Clause>();
         //loop for each line
 
 //WARNING bad files with multiple headers not properly handled yet
@@ -34,11 +36,13 @@ public class Parser {
                 //verify format
                 if (!fileInfo[1].equals("cnf")) {throw new IllegalArgumentException("File not of supported type.");}
                 variables = Integer.parseInt(fileInfo[2]);
-                clauses = Integer.parseInt(fileInfo[3]);
+                numClauses = Integer.parseInt(fileInfo[3]);
             }
+            clauses.add(lineToClause(line));
+
 
         }
-        return new Formula();
+        return new Formula(clauses);
     }
 
 
@@ -52,6 +56,7 @@ public class Parser {
         boolean isNegated = false;
 
         for (String stringLit : stringLiterals) {
+            //all lines end with 0
             if (stringLit.charAt(0) == '0') {break;}
             if(stringLit.charAt(0) == '-') {
                 isNegated = true;
