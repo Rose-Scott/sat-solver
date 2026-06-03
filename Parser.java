@@ -37,6 +37,7 @@ public class Parser {
                 if (!fileInfo[1].equals("cnf")) {throw new IllegalArgumentException("File not of supported type.");}
                 variables = Integer.parseInt(fileInfo[2]);
                 numClauses = Integer.parseInt(fileInfo[3]);
+                continue;
             }
             clauses.add(lineToClause(line));
 
