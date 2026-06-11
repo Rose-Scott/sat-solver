@@ -12,10 +12,10 @@ public class Clause {
     public TruthValue satisfied(TruthValue[] variableValues) {
         //loop through literals and determin
         //satisfied, false or incomplete
-        boolean unsatisfied = false;
+        boolean incomplete = false;
         for (Literal lit : literals) {
             if (variableValues[lit.variableId] == TruthValue.UNASSIGNED) {
-                unsatisfied = true;
+                incomplete = true;
                 continue;
             }
             // A literal is satisfied if its truth value XOR with negation is true
@@ -23,7 +23,25 @@ public class Clause {
                 return TruthValue.TRUE;
             }
         }
-        return unsatisfied ? TruthValue.UNASSIGNED : TruthValue.FALSE;
+        return incomplete ? TruthValue.UNASSIGNED : TruthValue.FALSE;
+    }
+    public boolean isUnitClause(TruthValue[] variableValues)  {
+        int numUnasigned = 0;
+
+        for (Literal lit: literals) {
+            if (!variableValues[lit.variableId].isAssigned())    {numUnasigned++;}
+            if (variableValues[lit.variableId].isTrue() ^ lit.isNegated) {return false;}
+        }
+
+        return (numUnasigned == 1) ? true : false;
+    }
+
+    //pre condition is that the clause is a unit clause ie there is exactly one unnasigned lit
+    public Literal unnasigned(TruthValue[] variableValues)  {
+        for (Literal lit : literals)    {
+            if (!variableValues[lit.variableId].isAssigned())   {return lit;}
+        }
+        return null;
     }
 
     @Override

@@ -1,0 +1,9 @@
+c this test was generated with the use of AI
+c This is a structurally unsatisfiable formula.
+c Clause 1 requires either x1 or x2 to be true.
+c Clause 2 forces x1 to be false.
+c Clause 3 forces x2 to be false.
+p cnf 2 3
+1 2 0
+-1 0
+-2 0

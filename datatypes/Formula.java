@@ -3,11 +3,19 @@ import java.util.List;
 
 public class Formula {
     List<Clause> clauses;
+    int variables;
 
-    public Formula (List<Clause> clauses)   {
+    public Formula (List<Clause> clauses, int variables)   {
         this.clauses = clauses;
+        this.variables = variables;
     }
 
+    public List<Clause> getClauses()   {
+        return this.clauses;
+    }
+    public int getVariables()   {
+        return this.variables;
+    }
 
 
     public TruthValue satisfied(TruthValue[] variableValues)    {

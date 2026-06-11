@@ -8,6 +8,14 @@ public class Literal {
         this.isNegated = isNegated;
     }
 
+    public int getVariableId()  {
+        return this.variableId;
+    }
+
+    public boolean getIsNegated()   {
+        return this.isNegated;
+    }
+
     @Override
     public String toString()   {
         return isNegated ? "-x" + variableId : "x" + variableId;

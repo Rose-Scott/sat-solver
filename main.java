@@ -6,10 +6,26 @@
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Arrays;
+
+import datatypes.Formula;
+import datatypes.TruthValue;
 
 public class main {
     public static void main(String[] args) throws FileNotFoundException {
-        File test = new File("testDIMACS1.txt");
-        System.out.println(Parser.parseDIMACSCNF(test));
+        //get files
+        if (args.length == 0) {
+            System.err.println("Usage: java main <test_file>");
+            System.exit(1);
+        }
+        
+        //DIMACS call
+        File test = new File(args[0]);
+        Formula formula = Parser.parseDIMACSCNF(test);
+        TruthValue[] values = new TruthValue[formula.getVariables() + 1];
+        Arrays.fill(values, TruthValue.UNASSIGNED);
+        Boolean result = Dpll.dpplStep(formula, values);
+        System.out.println(result);
+
     }
 }

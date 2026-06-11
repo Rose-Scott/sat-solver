@@ -41,9 +41,9 @@ public class Parser {
             }
             clauses.add(lineToClause(line));
 
-
+        
         }
-        return new Formula(clauses);
+        return new Formula(clauses, variables);
     }
 
 
